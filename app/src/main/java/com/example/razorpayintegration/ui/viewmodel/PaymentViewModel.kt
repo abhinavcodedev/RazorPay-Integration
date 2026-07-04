@@ -1,11 +1,9 @@
 package com.example.razorpayintegration.ui.viewmodel
 
 import android.app.Activity
-import androidx.compose.foundation.pager.PagerState
 import androidx.lifecycle.ViewModel
 import com.example.razorpayintegration.data.config.RazorpayConfig
 import com.example.razorpayintegration.data.model.PaymentState
-import com.example.razorpayintegration.ui.screen.PaymentScreen
 import com.razorpay.Checkout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,6 +22,10 @@ class PaymentViewModel: ViewModel() {
                 put("currency","INR")
                 put("amount",(amount*100).toLong())
                 put("theme","#3399cc")
+                put("prefill", JSONObject().apply {
+                    put("email","razorg@gmail.com")
+                    put("contact","9865230000")
+                })
                 put("method", JSONObject().apply {
                     put("upi",true)
                     put("qr",true)
@@ -45,11 +47,11 @@ class PaymentViewModel: ViewModel() {
         }
     }
 
-    fun handlePaymentSucess(paymentId: String){
+    fun handlePaymentSuccess(paymentId: String){
         _paymentState.value = PaymentState.Success(paymentId)
     }
 
-    fun handlePaymentError(message: String){
+    fun handlePaymentError(code: Int ,message: String){
         _paymentState.value = PaymentState.Error(message)
     }
 }
