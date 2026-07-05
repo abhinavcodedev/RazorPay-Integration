@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RazorpayIntegration</string>
+    <string name="key_secret">romxouec5ze5r1KG5Lhqdx0M</string>
 </resources>
